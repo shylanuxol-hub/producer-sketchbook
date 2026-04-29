@@ -6,6 +6,7 @@
 
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 require('dotenv').config(); // Load API keys from .env file
 const chatRoute = require('./routes/chat');
 const analyzeRoute = require('./routes/analyze');
@@ -23,4 +24,11 @@ app.use(express.json({ limit: '50mb' }));
 app.use(chatRoute); // /api/chat — AI conversation endpoint
 app.use(analyzeRoute); // /api/analyze — Essentia.js audio analysis
 
-app.listen(3001, () => console.log('Server running on 3001'));
+// Serve React build in production
+app.use(express.static(path.join(__dirname, '../client/build')));
+app.get('/{*path}', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+});
+
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, () => console.log(`Server running on ${PORT}`));

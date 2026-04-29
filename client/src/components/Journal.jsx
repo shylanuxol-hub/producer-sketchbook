@@ -129,7 +129,7 @@ function Journal({ audioMetadata, onMetadataConsumed, droppedImage, onImageConsu
     if (onLog) onLog('sending to ai for response...', '#888');
 
     try {
-      const response = await fetch('http://localhost:3001/api/chat', {
+      const response = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         // Send the full conversation history so AI has context
@@ -209,7 +209,7 @@ function Journal({ audioMetadata, onMetadataConsumed, droppedImage, onImageConsu
     ];
 
     try {
-      const response = await fetch('http://localhost:3001/api/chat', {
+      const response = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ messages: apiMessages })
