@@ -84,4 +84,4 @@ Producer Sketchbook sits upstream of the DAW. It's for the moment before you ope
 
 ## Created by
 
-Shyla Nuxol — University of Central Florida, 2026
+Shyla Nuxol - University of Central Florida, 2026

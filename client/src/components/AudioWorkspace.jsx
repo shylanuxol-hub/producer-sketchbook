@@ -42,6 +42,7 @@ function AudioWorkspace({ onAudioAnalyzed }) {
   const animationRef = useRef(null); // requestAnimationFrame ID (for cleanup)
   const midiCanvasRef = useRef(null); // Canvas element for MIDI piano roll
   const midiContainerRef = useRef(null); // Container div for MIDI piano roll
+  const isPlayingRef = useRef(false); // Track playing state in a ref to avoid stale closures
 
   // WAVEFORM DRAWING
 
@@ -359,6 +360,11 @@ function AudioWorkspace({ onAudioAnalyzed }) {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, [midiData]);
+
+  // Keep isPlayingRef in sync with isPlaying state
+  useEffect(() => {
+    isPlayingRef.current = isPlaying;
+  }, [isPlaying]);
 
   // DRAG AND DROP HANDLERS
 
@@ -725,6 +731,7 @@ function AudioWorkspace({ onAudioAnalyzed }) {
         animationRef.current = requestAnimationFrame(animate);
       } else {
         setIsPlaying(false);
+        isPlayingRef.current = false;
       }
     }
 
@@ -736,10 +743,17 @@ function AudioWorkspace({ onAudioAnalyzed }) {
 
   // Toggle play/pause
   function togglePlayback() {
-    if (!audioBuffer || !audioContextRef.current) return;
+    if (!audioBuffer || !audioContextRef.current) {
+      return;
+    }
 
-    if (isPlaying) {
-      // ---- PAUSE ----  
+    // Resume audio context if it's suspended (browser autoplay policy)
+    if (audioContextRef.current.state === 'suspended') {
+      audioContextRef.current.resume();
+    }
+
+    if (isPlayingRef.current) {
+      // ---- PAUSE ----
       if (sourceRef.current) {
         sourceRef.current.stop();
         sourceRef.current = null;
@@ -748,24 +762,36 @@ function AudioWorkspace({ onAudioAnalyzed }) {
         cancelAnimationFrame(animationRef.current);
       }
       setIsPlaying(false);
+      isPlayingRef.current = false;
     } else {
       // ---- PLAY ----
-      // Create a new source node each time (Web Audio API requirement — source nodes can only be started once)  
+      // If we played to the end last time, restart from the beginning
+      const atEnd = playProgress >= 0.999;
+      const startProgress = atEnd ? 0 : playProgress;
+      if (atEnd) setPlayProgress(0);
+
       const source = audioContextRef.current.createBufferSource();
       source.buffer = audioBuffer;
       source.connect(audioContextRef.current.destination);
       source.onended = () => {
-        setIsPlaying(false);
-        if (animationRef.current) {
-          cancelAnimationFrame(animationRef.current);
+        // Only run this if it's a natural end (manual stops null out sourceRef first)
+        if (sourceRef.current === source) {
+          setIsPlaying(false);
+          isPlayingRef.current = false;
+          setPlayProgress(0); // reset so next play starts from the top
+          sourceRef.current = null;
+          if (animationRef.current) {
+            cancelAnimationFrame(animationRef.current);
+            animationRef.current = null;
+          }
         }
       };
 
-      // Resume from current position
-      const offset = playProgress * audioBuffer.duration;
+      const offset = startProgress * audioBuffer.duration;
       source.start(0, offset);
       sourceRef.current = source;
       setIsPlaying(true);
+      isPlayingRef.current = true;
       startPlayheadAnimation(audioBuffer.duration, offset);
     }
   }
@@ -802,14 +828,21 @@ function AudioWorkspace({ onAudioAnalyzed }) {
     setPlayProgress(progress);
 
     // If playing, restart from the new position
-    if (isPlaying) {
+    if (isPlayingRef.current) {
       const source = audioContextRef.current.createBufferSource();
       source.buffer = audioBuffer;
       source.connect(audioContextRef.current.destination);
       source.onended = () => {
-        setIsPlaying(false);
-        if (animationRef.current) {
-          cancelAnimationFrame(animationRef.current);
+        // Only run this if it's a natural end (manual stops null out sourceRef first)
+        if (sourceRef.current === source) {
+          setIsPlaying(false);
+          isPlayingRef.current = false;
+          setPlayProgress(0); // reset so next play starts from the top
+          sourceRef.current = null;
+          if (animationRef.current) {
+            cancelAnimationFrame(animationRef.current);
+            animationRef.current = null;
+          }
         }
       };
 
@@ -833,6 +866,7 @@ function AudioWorkspace({ onAudioAnalyzed }) {
     setFile(null);
     setAudioBuffer(null);
     setIsPlaying(false);
+    isPlayingRef.current = false;
     setPlayProgress(0);
     setMetadata(null);
     setError('');

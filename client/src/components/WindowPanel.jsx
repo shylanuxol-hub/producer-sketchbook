@@ -108,7 +108,7 @@ function WindowPanel({ title, children, style }) {
         <div style={{
           flex: 1,
           position: 'relative',
-          overflow: 'hidden',
+          overflow: 'auto',
           display: 'flex',
           flexDirection: 'column',
           background: '#eceaf0', // Light purple-grey base color

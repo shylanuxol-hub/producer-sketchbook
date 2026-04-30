@@ -71,7 +71,7 @@ const prompts = [
   },
   {
     text: "what would your music sound like if you weren't afraid of what anyone thought? make that.",
-    ascii: "( •̀ᄇ• ́)ﻭ✧"
+    ascii: "( •ᄇ•)ﻭ✧"
   },
   {
     text: "record silence for 60 seconds. listen back. it's not silent. use what you find.",

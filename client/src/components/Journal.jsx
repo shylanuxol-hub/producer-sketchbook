@@ -155,7 +155,7 @@ function Journal({ audioMetadata, onMetadataConsumed, droppedImage, onImageConsu
       }
 
       // Start the typing animation for the response
-      typeMessage(data.reply, () => {
+      typeMessage(data.reply || 'hmm, something went wrong. try again?', () => {
         // Once typing finishes, add the AI message to the conversation
         const aiMessage = { role: 'assistant', content: data.reply };
         setMessages([...updatedMessages, aiMessage]);
@@ -229,7 +229,7 @@ function Journal({ audioMetadata, onMetadataConsumed, droppedImage, onImageConsu
         });
       }
 
-      typeMessage(data.reply, () => {
+      typeMessage(data.reply || 'hmm, something went wrong. try again?', () => {
         const aiMessage = { role: 'assistant', content: data.reply };
         setMessages([...updatedMessages, aiMessage]);
         setDisplayedText('');
