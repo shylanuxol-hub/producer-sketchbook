@@ -658,7 +658,7 @@ function AudioWorkspace({ onAudioAnalyzed }) {
         // Convert Float32Array to regular array for JSON serialization
         const audioData = Array.from(decoded.getChannelData(0).slice(0, maxSamples));
 
-        const analyzeResponse = await fetch('/api/chat', {
+        const analyzeResponse = await fetch('/api/analyze', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
