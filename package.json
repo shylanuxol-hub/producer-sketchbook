@@ -5,5 +5,8 @@
     "install:all": "cd server && npm install && cd ../client && npm install",
     "build": "cd client && npm run build",
     "start": "cd server && node server.js"
+  },
+  "dependencies": {
+    "express-rate-limit": "^8.5.2"
   }
 }
