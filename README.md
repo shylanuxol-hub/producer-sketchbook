@@ -62,26 +62,26 @@ Then visit http://localhost:3001
 
     producer-sketchbook/
       server/
-        server.js              — Express app, serves API and React build
+        server.js                  Express app, serves API and React build
         routes/
-          chat.js              — Anthropic API with extended thinking + vision
-          analyze.js           — Essentia.js WASM audio analysis
+          chat.js                  Anthropic API with extended thinking + vision
+          analyze.js               Essentia.js WASM audio analysis
       client/
         src/
-          App.js               — Main layout, state management, component wiring
+          App.js                   Main layout, state management, component wiring
           components/
-            Journal.jsx        — AI chat interface
-            AudioWorkspace.jsx — Audio/MIDI loading, waveform, piano roll
-            VisualCanvas.jsx   — Image collage system
-            WindowPanel.jsx    — Reusable panel with minimize/close
-            Interworkings.jsx  — Real-time AI transparency log
-            SketchbookView.jsx — Save/load session modal
-            StickyNote.jsx     — Creative prompt system with drag
+            Journal.jsx            AI chat interface
+            AudioWorkspace.jsx     Audio/MIDI loading, waveform, piano roll
+            VisualCanvas.jsx       Image collage system
+            WindowPanel.jsx        Reusable panel with minimize/close
+            Interworkings.jsx      Real-time AI transparency log
+            SketchbookView.jsx     Save/load session modal
+            StickyNote.jsx         Creative prompt system with drag
 
 ## Design Philosophy
 
-Producer Sketchbook sits upstream of the DAW. It's for the moment before you open Ableton or FL Studio, when you're figuring out what you want to make. The AI companion helps producers explore moods, analyze reference tracks, gather visual inspiration, and develop creative direction — without generating music or making creative decisions for them.
+The AI companion helps producers explore moods, analyze reference tracks, gather visual inspiration, and develop creative direction without generating music or making creative decisions for them.
 
 ## Created by
 
-Shyla Nuxol - University of Central Florida, 2026
+Shyla Nuxol, University of Central Florida, 2026
