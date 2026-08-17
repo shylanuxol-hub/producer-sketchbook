@@ -40,23 +40,23 @@ Then visit http://localhost:3001
 ## Features
 
 ### Core
-- **Guided Journal** — AI chat companion ("Scribbles") for music ideation with typing animation, conversation history, and auto-scroll
-- **Audio Workspace** — drag-and-drop audio loading, waveform visualization with zoom in/out, playback with playhead, click-to-seek
-- **Audio Analysis** — BPM, key + scale, sample rate, channels, bit depth, 8-band frequency spectrum
-- **Visual Canvas** — image collage system with drag-to-reposition, scale, rotate, delete, and tape strip effect
-- **AI Vision** — dropped images analyzed by Anthropic vision API, AI responds with sonic inspiration
+- **Guided Journal** - AI chat companion ("Scribbles") for music ideation with typing animation, conversation history, and auto-scroll
+- **Audio Workspace** - drag-and-drop audio loading, waveform visualization with zoom in/out, playback with playhead, click-to-seek
+- **Audio Analysis** - BPM, key + scale, sample rate, channels, bit depth, 8-band frequency spectrum
+- **Visual Canvas** - image collage system with drag-to-reposition, scale, rotate, delete, and tape strip effect
+- **AI Vision** - dropped images analyzed by Anthropic vision API, AI responds with sonic inspiration
 
 ### Advanced
-- **Essentia.js Integration** — professional-grade audio analysis powered by the same library used by Freesound and AcousticBrainz (Music Technology Group, UPF Barcelona). Provides key detection, danceability, spectral centroid (brightness), dynamic complexity, and loudness
-- **MIDI Parsing** — piano roll visualization with colored note blocks per track, velocity-based opacity, BPM from MIDI header, note and track counts
-- **Extended Thinking** — AI reasoning process visible in real-time in the Interworkings transparency panel
-- **Sketchbook Save/Load** — save sessions to localStorage, restore from a modal with open/delete buttons
+- **Essentia.js Integration** - professional-grade audio analysis powered by the same library used by Freesound and AcousticBrainz (Music Technology Group, UPF Barcelona). Provides key detection, danceability, spectral centroid (brightness), dynamic complexity, and loudness
+- **MIDI Parsing** - piano roll visualization with colored note blocks per track, velocity-based opacity, BPM from MIDI header, note and track counts
+- **Extended Thinking** - AI reasoning process visible in real-time in the Interworkings transparency panel
+- **Sketchbook Save/Load** - save sessions to localStorage, restore from a modal with open/delete buttons
 
 ### UI/UX
-- **Sticky Note Prompts** — 18 curated creative prompts with ASCII art/Kaomoji, random on each refresh, draggable on the notebook surface
-- **Collapse/Expand Workspaces** — minimize panels to title bar, close with restore button
-- **Zoom In/Out Waveform** — +/- buttons, scroll left/right when zoomed, fit button to reset
-- **Paper/Notebook Aesthetic** — sky background, notebook paper spread, crumpled paper textures, retro window chrome, tape strip effects
+- **Sticky Note Prompts** - 18 curated creative prompts with ASCII art/Kaomoji, random on each refresh, draggable on the notebook surface
+- **Collapse/Expand Workspaces** - minimize panels to title bar, close with restore button
+- **Zoom In/Out Waveform** - +/- buttons, scroll left/right when zoomed, fit button to reset
+- **Paper/Notebook Aesthetic** - sky background, notebook paper spread, crumpled paper textures, retro window chrome, tape strip effects
 
 ## Architecture
 
